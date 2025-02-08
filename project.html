@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE319</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="grid-container">
+        <header class="header">
+            <div class="header-title">Knowledge Management Portal</div>
+            <div class="contact-info">Contact</div>
+        </header>
+        <aside class="sidebar">
+            <a href="link1.html" class="sidebar-section"><b>Library</b></a>
+            <a href="link2.html" class="sidebar-section"><b>Section 2</b></a>
+            <a href="link3.html" class="sidebar-section"><b>Section 3</b></a>
+            <a href="link4.html" class="sidebar-section"><b>Section 4</b></a>
+            <a href="link5.html" class="sidebar-section"><b>Section 5</b></a>
+            <a href="link6.html" class="sidebar-section"><b>Section 6</b></a>
+            <a href="link7.html" class="sidebar-section"><b>Section 7</b></a>
+        </aside>
+        <main class="main-content">
+        </main>
+    </div>
+
+    <script>
+        
+        let sidebar = document.querySelector('.sidebar');
+        let isMouseInSidebar = false; 
+
+        sidebar.addEventListener('mouseenter', function() {
+            isMouseInSidebar = true;
+            sidebar.style.left = '0'; 
+        });
+
+       
+        sidebar.addEventListener('mouseleave', function() {
+            isMouseInSidebar = false;
+        });
+
+        
+        document.addEventListener('mousemove', function(event) {
+            if (event.clientX <= 50 && !isMouseInSidebar) {
+                sidebar.style.left = '0';
+            } else if (event.clientX > 50 && !isMouseInSidebar) {
+              
+                setTimeout(function() {
+                    if (!isMouseInSidebar) {
+                        sidebar.style.left = '-300px';
+                    }
+                }, 200);
+            }
+        });
+    </script>
+</body>
+</html>

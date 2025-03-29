@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows == 1) {
         $_SESSION['username'] = $user;
-        header("Location: dashboard.php");
+        header("Location: project.html");
         exit();
     } else {
         echo "<script>

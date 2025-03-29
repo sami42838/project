@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Discussion Room</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200">
+    <header class="w-full bg-gray-700 text-white p-4 fixed top-0 left-0 right-0 flex justify-center items-center">
+        <h1 class="text-xl font-bold">Library Discussion Room Booking</h1>
+        <a href="library.html" class="absolute right-4 text-white underline hover:text-gray-300">Back</a>
+    </header>
+
+    <div class="flex items-center justify-center min-h-screen pt-16">
+        <div class="w-full max-w-4xl">
+            <div class="bg-white p-8 rounded-lg shadow-lg w-96 mx-auto">
+                <h2 class="text-2xl font-bold text-center mb-6">Book a Discussion Room</h2>
+                <form action="book_room.php" method="POST" class="space-y-4">
+                    <div>
+                        <label class="block font-medium">Name</label>
+                        <input type="text" name="name" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block font-medium">Email</label>
+                        <input type="email" name="email" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block font-medium">Time</label>
+                        <input type="time" name="time" required id="timeInput" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                </form>
+            </div>
+
+            <div class="bg-white p-8 mt-8 rounded-lg shadow-lg w-96 mx-auto">
+                <h2 class="text-2xl font-bold text-center mb-6">Already Booked Slots</h2>
+                <ul id="bookedSlots" class="text-center space-y-2 text-red-500 font-semibold"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function fetchBookedSlots() {
+            fetch('get_bookings.php')
+                .then(response => response.json())
+                .then(data => {
+                    const bookedSlots = document.getElementById('bookedSlots');
+                    bookedSlots.innerHTML = "";
+                    data.forEach(slot => {
+                        let li = document.createElement('li');
+                        li.textContent = slot;
+                        bookedSlots.appendChild(li);
+                    });
+                })
+                .catch(error => console.error('Error fetching booked slots:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchBookedSlots);
+    </script>
+</body>
+</html>
